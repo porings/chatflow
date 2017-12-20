@@ -1,0 +1,65 @@
+Important Notes
+Contacting customer service can often be a challenging experience, since the conversation engagement does not always meet the caller’s expectation. Waiting on hold, repeating information from one agent to the next, and generally spending too much time getting answers to questions can all lead to a lengthy and often frustrating customer journey. Today, AI is playing a role in improving this customer experience in call centers to include engagement through chatbots -- intelligent, natural language virtual assistants. These chatbots are able to recognize human speech and understand the caller’s intent without requiring the caller to speak in specific phrases. Callers can perform tasks such as changing a password, requesting a balance on an account, or scheduling an appointment, without the need to speak to an agent.
+Using Amazon Lex, a service that allows you to create intelligent conversational chatbots, you can turn your call center contact flows into natural conversations that provide personalized experiences for your callers. Using the same technology that powers Amazon Alexa, an Amazon Lex chatbot can be attached to your contact flow to recognize the intent of your caller, ask follow-up questions, and provide answers. Amazon Lex maintains context and manages the dialogue, dynamically adjusting the responses based on the conversation, so your contact center can perform common tasks for callers, to address many customer inquiries through self-service interactions. Additionally, Amazon Lex chatbots support an optimal (8 kHz) telephony audio sampling rate, to provide increased speech recognition accuracy and fidelity for your contact center interactions.
+Integration with Amazon Lex is available with Amazon Connect, a simple to use, cloud-based contact center service, but you can also take advantage of the 8kHz feature with Amazon Lex in your preferred call center solution.
+https://aws.amazon.com/chatbots-in-call-centers/
+https://aws.amazon.com/blogs/aws/new-amazon-connect-and-amazon-lex-integration/
+
+Q. What are the most common use cases for Amazon Lex?
+The most common use-cases include:
+• Informational bot – build an automated customer support agent or bot that answers questions
+• Application/Transactional bot – build a stand-alone pizza ordering agent or a travel bot
+• Enterprise Productivity bot – build custom bots to connect to enterprise data resources
+• Device Control bot– use Amazon Lex to issue control commands to connected devices
+
+Technical
+Q. How can I validate user input? 
+
+Amazon Lex provides deep integration with AWS Lambda and you can validate user input using the initialization and validation codeHook. This code gets executed at every turn of the conversation. The codehook can be used to set up session parameters, validate user input and customize responses.
+(Need to add in filters for profanity and messages that can be ignored)
+Q. What is an Intent? 
+
+To build an Amazon Lex bot, you will need to identify a set of actions - known as  ‘intents’ -- that you want your bot to fulfill. A bot can have multiple intents. For example, a ‘BookTickets’ bot can have intents to make reservations, cancel reservations and review reservations.
+Q. What is an utterance? 
+
+An ‘utterance’ is the spoken or typed phrase to invoke an intent. For example, to invoke the intent to make reservations, you would provide a sample utterance such as, “Can I make a reservation?”
+Q. What are slots? 
+
+To fulfill an intent, the Amazon Lex bot needs information from the user. This information is captured in ‘slots’. For example, you would define show name and time as slots for intent to make reservations.
+Q. What are prompts? 
+
+Amazon Lex elicits the defined ‘slots’ by using the ‘prompts’ provided. For example, to elicit value for the slot ‘time’ you will define a prompt such as “What show time would you like to reserve?”. Amazon Lex is capable of eliciting multiple slot values via a multi-turn conversation.
+Q. How is an action fulfilled? 
+
+Amazon Lex integrates with AWS Lambda for ‘fulfillment’ of the action or business logic. Alternately, you can configure Amazon Lex to return parsed intent and slot values to the client for action fulfillment.
+Q. How do I monitor and track my bot? 
+
+You can track metrics for your bot on the ‘Monitoring’ dashboard in the Amazon Lex Console. Currently, you can track the number of missed utterances, request latency and traffic by channel for your bot. You can view list of utterances that were not recognized by your bot, aka 'missed utterances'. With these monitoring capabilities, you view how your users are interacting with the bot and make improvements over time.
+Q. Can I have an Amazon Lex bot version deployed for use by end users while I continue to develop on a different version?
+
+Yes. You can build and deploy a version of your bot into production while you continue to develop on a different version. Every version of an Amazon Lex bot will have an ARN. Each version can be associated with a different alias. You can use these tools to set up dev, stage and prod environments.
+Q. Can I choose different versions while deploying to different messaging services?
+
+Yes. You can deploy a specific version to each messaging service. Every version of Amazon Lex will have an ARN. Each version can be associated with an alias. You can use different aliases for deployment to different messaging service. Also, you can have multiple bots deployed to the same messaging service.
+Q. What is the maximum duration of speech input?
+
+Amazon Lex supports up to 15 seconds of speech input.
+Q. Can I configure for speech input and text output?
+
+Yes, you can just choose the PostContent API to provide voice input and choose text output.
+Q. How many languages are supported on Amazon Lex?
+
+Currently, Amazon Lex supports US English.
+https://chatbot.com.hk/?gclid=EAIaIQobChMIsdHBvfmX2AIVjAMqCh1ozgMlEAAYBCAAEgIlfPD_BwE
+Q. How is this different from Alexa Skills Kit?
+Alexa Skills Kit (ASK) is used to build skills for use in the Alexa ecosystem and devices and lets developers take advantage of all Alexa capabilities such as the Smart Home and Flash Briefing API, streaming audio and rich GUI experiences. Amazon Lex bots support both voice and text and can be deployed across mobile and messaging platforms.
+Q. Do I need a wake word to invoke an Amazon Lex intent?
+Amazon Lex does not support wake word functionality. The app that integrates with Amazon Lex will be responsible for triggering the microphone, i.e. push to talk.
+Q. Can an Amazon Lex bot respond using Alexa’s voice?
+Currently we do not support the Alexa voice for Amazon Lex responses. However, there are 7 other voices from which to choose.
+Q. Are voice and text inputs processed by Amazon Lex stored, and how are they used by AWS?
+Amazon Lex may store and use voice and text inputs processed by the service solely to provide and maintain the service and to improve and develop the quality of Amazon Lex and other Amazon machine-learning/artificial-intelligence technologies. Use of your content is necessary for continuous improvement of your Amazon Lex customer experience, including the development and training of related technologies. We do not use any personally identifiable information that may be contained in your content to target products, services or marketing to you or your end users. Your trust, privacy, and the security of your content are our highest priority and we implement appropriate and sophisticated technical and physical controls, including encryption at rest and in transit, designed to prevent unauthorized access to, or disclosure of, your content and ensure that our use complies with our commitments to you. Please see https://aws.amazon.com/compliance/data-privacy-faq/ for more information.
+
+
+Others
+
