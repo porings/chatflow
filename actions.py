@@ -16,7 +16,6 @@ class ActionRequestPrice(Action):
         params = {x: "" for x in missing_params}
 
         for x in list(missing_params):
-            print(x, tracker.current_slot_values().get(x))
             if tracker.current_slot_values().get(x):
                 params[x] = tracker.current_slot_values().get(x)
                 missing_params.remove(x)
@@ -31,6 +30,7 @@ class ActionRequestPrice(Action):
         ))
 
         dispatcher.utter_message("Trader quoted: {}/{} for RFQ ID: {}".format(6.05, 6.03, rfqID))
+        dispatcher.utter_message("Would you like to buy/sell (ClientPay/ClientReceive) on RFQ ID: {}".format(6.05, 6.03, rfqID))
 
         return [
             SlotSet("quantity"),
@@ -49,8 +49,13 @@ class ActionSetDirection(Action):
     def run(self, dispatcher, tracker, domain):
         rfqID = tracker.get_slot("rfqID")
         direction = tracker.get_slot("direction")
-        dispatcher.utter_message("Alright, {} on RFQ ID: {}".format(direction, rfqID))
-        return [SlotSet("direction")]
+        if direction:
+            dispatcher.utter_message("Alright, {} on RFQ ID: {}".format(direction, rfqID))
+            dispatcher.utter_message("Would you like me to book RFQ ID: {}".format(rfqID))
+            return []
+        else:
+            dispatcher.utter_message("Sorry, I am unable to understand. Can you please try again?")
+            return []
 
 
 class ActionBook(Action):
@@ -58,6 +63,31 @@ class ActionBook(Action):
         return 'action_book'
 
     def run(self, dispatcher, tracker, domain):
+        direction = tracker.get_slot("direction")
         rfqID = tracker.get_slot("rfqID")
-        dispatcher.utter_message("Booked RFQ {}".format(rfqID))
-        return [SlotSet("rfqID")]
+        if direction and rfqID:
+            dispatcher.utter_message("Booked RFQ {} on {}".format(direction, rfqID))
+            return [SlotSet("direction"), SlotSet("rfqID")]
+        else:
+            dispatcher.utter_message("Sorry, something went wrong. I am not sure which Direction ({}) and RFQ ({})".format(direction, rfqID))
+            return [SlotSet("direction"), SlotSet("rfqID")]
+
+
+class ActionTest1(Action):
+    def name(self):
+        return 'action_test1'
+
+    def run(self, dispatcher, tracker, domain):
+        dispatcher.utter_message("Test1")
+        dispatcher.utter_message("{}".format(tracker.current_slot_values()))
+        return []
+
+
+class ActionTest2(Action):
+    def name(self):
+        return 'action_test2'
+
+    def run(self, dispatcher, tracker, domain):
+        dispatcher.utter_message("Test2")
+        dispatcher.utter_message("{}".format(tracker.current_slot_values()))
+        return []
